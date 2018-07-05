@@ -1,0 +1,166 @@
+#!/usr/bin/env python3.6
+# -*- coding: utf-8 -*-
+
+import pexpect
+import time
+
+user = "root"
+password = "Juniper"
+enable_pas = "cisco"
+ip = "192.168.221.231"
+protocol = "SSH"
+SSH_NEWKEY = r'Are you sure you want to continue connecting \(yes/no\)\?'
+error_authen = "Permission denied"
+error = "Error"
+
+def collect_config_cisco(ip, user, password, enable_pas, protocol):
+    if protocol == "SSH":
+        print("Connect to {0}".format(ip))
+        ssh = pexpect.spawn("ssh {0}@{1}".format(user, ip))
+        ssh.timeout = 15
+        i = ssh.expect([pexpect.TIMEOUT, SSH_NEWKEY, "[Pp]assword:", pexpect.EOF])
+        if i == 0:
+            print("TIMEOUT")
+            return error
+        elif i == 1:
+            print("accept key ssh")
+            ssh.sendline("yes")
+            ssh.expect("[Pp]assword:")
+            ssh.sendline(password)
+        elif i == 2:
+            ssh.sendline(password)
+        elif i == 3:
+            print("EOF Error")
+            return error
+
+        time.sleep(0.1)
+        i = ssh.expect(["#", ">", "[Pp]assword:", error_authen])
+        if i == 0:
+            ssh.sendline("terminal len 0")
+            ssh.expect("#")
+            time.sleep(0.1)
+            ssh.sendline("show running-config")
+            time.sleep(0.1)
+            ssh.expect("#")
+            config = ssh.before.decode("utf-8")
+            return config
+        elif i == 1:
+            ssh.sendline("enable")
+            time.sleep(0.1)
+            ssh.expect("[Pp]assword:")
+            ssh.sendline(enable_pas)
+            ii = ssh.expect(["#", "[Pp]assword:"])
+            if ii == 0:
+                ssh.sendline("terminal len 0")
+                ssh.expect("#")
+                time.sleep(0.1)
+                ssh.sendline("show running-config")
+                time.sleep(0.1)
+                ssh.expect("#")
+                config = ssh.before.decode("utf-8")
+                return config
+            else:
+                print("Bad enable password")
+                return error
+        elif i == 2:
+            print("Bad login or password")
+            return error
+
+    elif protocol == "Telnet":
+        print("Connect to {0}".format(ip))
+        telnet = pexpect.spawn("telnet {0}".format(ip))
+        telnet.timeout = 15
+        i = telnet.expect([pexpect.TIMEOUT, "[Uu]sername:", pexpect.EOF])
+        if i == 0:
+            print("TIMEOUT")
+            return error
+        elif i == 1:
+            telnet.sendline(user)
+            telnet.expect("[Pp]assword:")
+            telnet.sendline(password)
+        elif i == 2:
+            print("EOF Error")
+            return error
+
+        time.sleep(0.1)
+        i = telnet.expect(["#", ">", r"% Login invalid", error_authen])
+        if i == 0:
+            telnet.sendline("terminal len 0")
+            telnet.expect("#")
+            time.sleep(0.1)
+            telnet.sendline("show running-config")
+            time.sleep(0.1)
+            telnet.expect("#")
+            config = telnet.before.decode("utf-8")
+            return config
+        elif i == 1:
+            telnet.sendline("enable")
+            time.sleep(0.1)
+            telnet.expect("[Pp]assword:")
+            telnet.sendline(enable_pas)
+            ii = telnet.expect(["#", "[Pp]assword:"])
+            if ii == 0:
+                telnet.sendline("terminal len 0")
+                telnet.expect("#")
+                time.sleep(0.1)
+                telnet.sendline("show running-config")
+                time.sleep(0.1)
+                telnet.expect("#")
+                config = telnet.before.decode("utf-8")
+                return config
+            else:
+                print("Bad enable password")
+                return error
+        elif i == 2:
+            print("Bad login or password")
+            return error
+
+
+def collect_config_juniper(ip, user, password, protocol):
+    if protocol == "SSH":
+        print("Connect to {0}".format(ip))
+        ssh = pexpect.spawn("ssh {0}@{1}".format(user, ip))
+        ssh.timeout = 15
+        i = ssh.expect([pexpect.TIMEOUT, SSH_NEWKEY, "[Pp]assword:", pexpect.EOF])
+        if i == 0:
+            print("TIMEOUT")
+            return error
+        elif i == 1:
+            print("accept key ssh")
+            ssh.sendline("yes")
+            ssh.expect("[Pp]assword:")
+            ssh.sendline(password)
+        elif i == 2:
+            ssh.sendline(password)
+        elif i == 3:
+            print("EOF Error")
+            return error
+
+        time.sleep(1)
+        ssh.sendline("\n")
+        i = ssh.expect(["%", ">", "[Pp]assword:"])
+        if i == 0:
+            ssh.sendline("cli")
+            ssh.expect(">")
+            ssh.sendline("set cli screen-length 0")
+            time.sleep(0.1)
+            ssh.expect(">")
+            ssh.sendline("show configuration")
+            time.sleep(0.1)
+            ssh.expect(">")
+            config = ssh.before.decode("utf-8")
+            return config
+        elif i == 1:
+            ssh.sendline("set cli screen-length 0")
+            time.sleep(0.1)
+            ssh.expect(">")
+            ssh.sendline("show configuration")
+            time.sleep(0.1)
+            ssh.expect(">")
+            config = ssh.before.decode("utf-8")
+            return config
+        elif i == 2:
+            print("Bad login or password")
+            return error
+
+config = collect_config_juniper(ip, user, password, protocol)
