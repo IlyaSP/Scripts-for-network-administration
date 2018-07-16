@@ -76,7 +76,7 @@ if data_correct == "y":
 		with open("/etc/hosts", "a") as hosts:
 			hosts.write("{0} {1}\n".format(ip, hostname))
 		with open("/var/rancid/Networking/router.db", "a") as router_db:
-			router_db.write("{0};{1};{2}\n".format(ip, vendor, status))
+			router_db.write("{0};{1};{2}\n".format(hostname, vendor, status))
 		print("##################################################\r\n"
 			  "#  Device {0} {1} add in rancid          #\r\n"
 			  "##################################################\r\n".format(hostname, ip))
