@@ -188,4 +188,4 @@ if __name__ == "__main__":
         end = datetime.datetime.now()
         delta = "{autored}" + str(end - start) + "{/autored}"
         print(Color(delta))
-        time.sleep(2)
+        time.sleep(2)  # interval between starts
