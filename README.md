@@ -38,7 +38,7 @@ The script is used to collect information about the losses of the maximum and av
 
 The script obtains a list of IP addresses from the unloading of SecureCRT sessions, checks their availability with the "ping" command, and at the end of the work displays a list of not available devices. Tested on Windows 10
 
-# 6. log_analayzer.py
+# 6. log_analyzer.py
 Скрипт предназначен для анализа лог файлов. Регулярное выражение для поиска вводится пользователем. Скрипт позволяет осуществлять многократный поиск в уже обработанных результатах (например: сначала поиск производится по одному регулярному выражению, далее в результатах это поиска, производится поиск по другому регулярному выражению и так далее). Так же скрипт поддерживает вывод в консоль результатов поиска с подсветкой того, что попадает под регулярное выражение, сохранение результатов поиска в файл. 
 Требуется установка библиотеки "colorclass".
 Тестировался на Windows 7
