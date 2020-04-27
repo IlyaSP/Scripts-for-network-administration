@@ -9,7 +9,7 @@
 
 5. ping_multiple_hosts_with_threading.py
 
-6.  	log_analayzer.py
+6. log_analayzer.py
 
 # 1. add_device_to_rancid.py
 Скрипт служит для добавления устройств в rancid. В скрепте реализована проверка корректности ввода IP адреса.
