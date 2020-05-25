@@ -1,0 +1,26 @@
+---
+- name         : Run show commands
+  hosts        : cisco-device
+  gather_facts : false
+  connection   : network_cli
+
+  tasks:
+    - name      : Collect facts
+      ios_facts :
+          gather_subset : 
+                        - interfaces
+      # register  : result
+      ignore_errors : yes
+    
+    - name  : Creat dir all fact
+      file  :
+             path  : ansible/all_facts
+             state : directory
+             mode  : 0755
+
+    - name       : Copy facts to file
+      connection : local
+      copy       :
+                   content: "{{ ansible_net_interfaces | to_nice_json }}"
+                   dest: "/home/bobr/ansible/all_facts/{{inventory_hostname}}_int.json" 
+

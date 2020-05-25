@@ -1,0 +1,65 @@
+{
+    "FastEthernet0/0": {
+        "bandwidth": 10000,
+        "description": "=To-MSK-c7009-1u3=",
+        "duplex": null,
+        "ipv4": [
+            {
+                "address": "192.168.136.120",
+                "subnet": "24"
+            }
+        ],
+        "lineprotocol": "up",
+        "macaddress": "c201.1cd7.0000",
+        "mediatype": null,
+        "mtu": 1500,
+        "operstatus": "up",
+        "type": "Gt96k FE"
+    },
+    "FastEthernet0/1": {
+        "bandwidth": 10000,
+        "description": null,
+        "duplex": null,
+        "ipv4": [],
+        "lineprotocol": "down",
+        "macaddress": "c201.1cd7.0001",
+        "mediatype": null,
+        "mtu": 1500,
+        "operstatus": "administratively down",
+        "type": "Gt96k FE"
+    },
+    "Loopback0": {
+        "bandwidth": 8000000,
+        "description": "=Users=",
+        "duplex": null,
+        "ipv4": [
+            {
+                "address": "1.1.1.1",
+                "subnet": "32"
+            }
+        ],
+        "lineprotocol": "up",
+        "macaddress": null,
+        "mediatype": null,
+        "mtu": 1514,
+        "operstatus": "up",
+        "type": null
+    },
+    "Loopback1": {
+        "bandwidth": 8000000,
+        "description": null,
+        "duplex": null,
+        "ipv4": [
+            {
+                "address": "1.1.1.2",
+                "subnet": "32"
+            }
+        ],
+        "lineprotocol": "up",
+        "macaddress": null,
+        "mediatype": null,
+        "mtu": 1514,
+        "operstatus": "up",
+        "type": null
+    }
+}

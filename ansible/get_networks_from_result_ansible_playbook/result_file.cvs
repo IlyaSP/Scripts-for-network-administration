@@ -1,0 +1,24 @@
+iou-router
+Interface;Description;ip_addr;Network
+Ethernet0/0;=To 3925=;192.168.136.122;192.168.136.0/24
+Loopback0;Loop0;2.2.2.1;2.2.2.0/25
+Loopback5;=test=;5.5.5.5;5.5.5.5/32
+
+MSK-w3725-1
+Interface;Description;ip_addr;Network
+FastEthernet0/0;=To-MSK-c7009-1u3=;192.168.136.120;192.168.136.0/24
+Loopback0;=Users=;1.1.1.1;1.1.1.1/32
+Loopback1;-;1.1.1.2;1.1.1.2/32
+
+iou-router
+Interface;Description;ip_addr;Network
+Ethernet0/0;=To 3925=;192.168.136.122;192.168.136.0/24
+Loopback0;Loop0;2.2.2.1;2.2.2.0/25
+Loopback5;=test=;5.5.5.5;5.5.5.5/32
+
+MSK-w3725-1
+Interface;Description;ip_addr;Network
+FastEthernet0/0;=To-MSK-c7009-1u3=;192.168.136.120;192.168.136.0/24
+Loopback0;=Users=;1.1.1.1;1.1.1.1/32
+Loopback1;-;1.1.1.2;1.1.1.2/32
+
