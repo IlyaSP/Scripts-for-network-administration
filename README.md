@@ -11,6 +11,8 @@
 
 6. log_analayzer.py
 
+7. folder ansible
+
 # 1. add_device_to_rancid.py
 Скрипт служит для добавления устройств в rancid. В скрепте реализована проверка корректности ввода IP адреса.
 В файл "/etc/hosts" добавляется запись вида "IP  hostname". В файл "router.db" добавляется запись вида "IP;vendor;status". Тестировалось на Centos 7
@@ -46,3 +48,8 @@ The script obtains a list of IP addresses from the unloading of SecureCRT sessio
 The script is designed to analyze log files. The regular expression to search is entered by the user. The script allows you to perform multiple searches in already processed results (for example: first the search is performed by one regular expression, then in the search results, the search is performed by another regular expression, and so on). The script also supports output to the console of search results with highlighting of what falls under the regular expression, saving search results to a file.
 Requires installation of the "colorclass" library.
 Tested on Windows 7
+
+# 7. Folder ansible
+Папка содержит скрипты для обработки данных в результате выполнения playbook в ansible.
+
+The folder contains scripts for processing data from the execution of the playbook in ansible.
