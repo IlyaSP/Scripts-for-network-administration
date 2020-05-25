@@ -22,8 +22,10 @@ This folder contains an example of files with data obtained as a result of ansib
 
 # 3. playbook_int_facts.yml
 Playbook для ansible с помощью которой были получены файлы находящиеся в папке "data"
+Playbook запускался на ansible 2.9
 
 Playbook for ansible with the help of which the files located in the "data" folder were received
+playbook was run on asible 2.9
 
 # 4.result_file.cvs
 Файл с результатами работы скрипта.
